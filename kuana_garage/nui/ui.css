@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins|Roboto+Condensed');
+
+body {
+	background-image: none;
+	background-repeat: no-repeat;
+	background-position-x: 50%;
+	background-position-y: 118%;
+}
+
+#div1 {
+	padding-top: 18.5%;
+	padding-left: 48%;
+}
+
+#div2 {
+	padding-top: 2.3%;
+	padding-left: 48%;
+}
+
+#bt1 {
+	width: 75px;
+	height: 30px;
+	background-color: transparent;
+	border: 0;
+}
+
+#bt2 {
+	width: 75px;
+	height: 30px;
+	background-color: transparent;
+	border: 0;
+}
