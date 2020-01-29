@@ -469,51 +469,6 @@ RegisterCommand('apre', function(source, args, rawCommand)
 end)
 
 
-RegisterCommand('sucata', function(source, args, rawCommand)
-	local ped = GetPlayerPed(-1)
-	local pos = GetEntityCoords(ped)
-	local veh = ESX.Game.GetVehiclesInArea(pos, 20000.0)
-	local elements = {}
-	ESX.TriggerServerCallback('kuana:getVehicles', function(vehicles)
-		for _,v in pairs(vehicles) do
-			local hashVehicule = v.vehicle.model
-			local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
-			local labelvehicle
-			local plate = v.plate
-			labelvehicle = vehicleName.. ' (' .. plate .. ') '
-			if v.state == false then			
-				table.insert(elements, {label =labelvehicle , value = v})
-			end
-		end
-		ESX.UI.Menu.Open(
-			'default', GetCurrentResourceName(), 'spawn_vehiclereload',
-			{
-				title    = _U('garage'),
-				align    = 'top-left',
-				elements = elements,
-			},
-			function(data, menu)
-					for i=1, #veh, 1 do
-						if veh then
-							local vehiclePropsn  = ESX.Game.GetVehicleProperties(veh[i])
-							if vehiclePropsn.plate == data.current.value.plate then
-								ESX.Game.DeleteVehicle(veh[i])
-								break
-							end
-						end
-					end
-				TriggerServerEvent('kuana:modifystate', data.current.value.plate, true)
-				menu.close()
-			end,
-			function(data, menu)
-				menu.close()
-				--CurrentAction = 'open_garage_action'
-			end
-		)	
-	end)
-end)
-
-
 RegisterNetEvent('kuana:checkveh')
 AddEventHandler('kuana:checkveh', function(xxx, yyy, zzz)
         local xxx = xxx + 0.0
