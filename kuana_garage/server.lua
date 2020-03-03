@@ -324,14 +324,15 @@ end)
 
 
 AddEventHandler('kuana:checkvehi', function(plate)
+			local src = source
 			--local result = MySQL.Sync.fetchScalar("SELECT lastpos FROM owned_vehicles WHERE plate = @plate", {['@plate'] = plate})
 			local xx = MySQL.Sync.fetchScalar("SELECT x FROM owned_vehicles WHERE plate = @plate", {['@plate'] = plate})		
 			local yy = MySQL.Sync.fetchScalar("SELECT y FROM owned_vehicles WHERE plate = @plate", {['@plate'] = plate})		
 			local zz = MySQL.Sync.fetchScalar("SELECT z FROM owned_vehicles WHERE plate = @plate", {['@plate'] = plate})
-			if xx ~= nil and yy ~= nil and zz ~= nil then		
-				TriggerClientEvent('kuana:checkveh', source, xx, yy, zz)
+			if xx ~= nil then		
+				TriggerClientEvent('kuana:checkveh', src, xx, yy, zz)
 			else
-				TriggerClientEvent('esx:showNotification', source, "~r~Invalid~w~ plate.")
+				TriggerClientEvent('esx:showNotification', src, "~r~Invalid~w~ plate.")
 			end
 end)
 
