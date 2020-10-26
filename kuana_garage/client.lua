@@ -144,6 +144,10 @@ function OpenMenuGarage(PointType)
 		table.insert(elements,{label = "Veiculos Apreendidos", value = 'return_vehicle'})
 	end
 
+	if #elements < 1 then
+		return ESX.ShowNotification('~r~Error~w~ getting menu')
+	end
+
 	ESX.UI.Menu.Open(
 		'default', GetCurrentResourceName(), 'garage_menu',
 		{
@@ -203,6 +207,9 @@ function ListVehiclesMenu()
 			
 		end
 
+		if #elements < 1 then
+			return ESX.ShowNotification('No vehicles found')
+		end
 	
 	ESX.UI.Menu.Open(
 		'default', GetCurrentResourceName(), 'spawn_vehicle',
@@ -322,6 +329,10 @@ function ReturnVehicleMenu()
     	
 			table.insert(elements, {label =labelvehicle, value = v})
 			
+		end
+
+		if #elements < 1 then
+			return ESX.ShowNotification('No vehicles found')
 		end
 
 		ESX.UI.Menu.Open(
@@ -516,6 +527,9 @@ RegisterCommand('procarro', function(source, args, rawCommand)
 							table.insert(elements, {label ="Remover do GPS" , value = "gps2"})
 						end
 					end
+					if #elements < 1 then
+						return ESX.ShowNotification('No vehicles found')
+					end
 					ESX.UI.Menu.CloseAll()
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'findcar',
@@ -550,6 +564,10 @@ RegisterCommand('procarro', function(source, args, rawCommand)
 										end
 										table.insert(elements3, {label ="Altura: "..v.height.." cm" , value = "height"})
 										table.insert(elements3, {label ="Voltar" , value = "back"})
+									end
+
+									if #elements3 < 1 then
+										return ESX.ShowNotification('No vehicles found')
 									end
 
 									ESX.UI.Menu.Open(
@@ -673,6 +691,9 @@ RegisterCommand('givecarkeys', function(source, args, rawCommand)
 							table.insert(elements2, {label =labelvehicle , value = v})
 						end
 				end
+				if #elements2 < 1 then
+					return ESX.ShowNotification('No vehicles found')
+				end
 				Citizen.Wait(1000)
 
 			
@@ -768,6 +789,9 @@ RegisterCommand('garagem', function(source, args, rawCommand)
 			if v.state == false then		
 				table.insert(elements, {label =labelvehicle , value = v})
 			end
+		end
+		if #elements < 1 then
+			return ESX.ShowNotification('No vehicles found')
 		end
 		ESX.UI.Menu.Open(
 			'default', GetCurrentResourceName(), 'spawn_vehiclereload',
@@ -878,6 +902,9 @@ Citizen.CreateThread(function()
 								if v.state == true then		
 									table.insert(elements, {label =labelvehicle , value = v})
 								end
+							end
+							if #elements < 1 then
+								return ESX.ShowNotification('No vehicles found')
 							end
 							ESX.UI.Menu.Open(
 								'default', GetCurrentResourceName(), 'spawn_sucata',
